@@ -6,6 +6,7 @@ import SelectBox from './components/SelectBox'
 import Autocomplete from './components/AutoComplete'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Checkbox from '@material-ui/core/Checkbox';
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
   const [referencePokemonData, setReferencePokemonData] = useState([])
   const [nextUrl, setNextUrl] = useState('')
   const [prevUrl, setPrevUrl] = useState('')
+  const [spinner, setSpinner] = useState(false)
 
   useEffect(() => {
     getData()
@@ -44,6 +46,7 @@ function App() {
   }
 
   const getAllPokemons = (url) => {
+    setSpinner(true)
     axios.get(url)
       .then(resp => {
         setNextUrl(resp.data.next)
@@ -62,6 +65,7 @@ function App() {
         setPokemonData(resp)
         setReferencePokemonData(resp)
         setAbilitiesArray(resp)
+        setSpinner(false)
       })
       .catch(err => console.log(err))
   }
@@ -122,7 +126,7 @@ function App() {
     let filteredArr = []
     let a = []
     let checkAbilities = abilities.filter(ability => {
-      if (Object.entries(ability)[0][1])
+      if (Object.entries(ability)[0][1]) {}
         return ability
     }).map(filter => Object.entries(filter)[0][0])
     console.log(checkAbilities);
@@ -146,20 +150,23 @@ function App() {
 
     if (filteredArr.length > 0)
       setPokemonData(filteredArr)
-    else if (filteredArr.length == 0) {
-      console.log('entrou aqui', pokemonData);
+    else if (filteredArr.length === 0) {
       setPokemonData(referencePokemonData)
     }
   }
 
   return (
-    <>
+    <div>
+      { spinner &&
+        <div className="spinner">
+          <CircularProgress color="secondary" />
+        </div>
+      }
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <p onClick={handleClick}>Clique aqui para reiniciar a pesquisa </p>
       </div>
 
       <div className="container">
-        {/* { loading && <CircularProgress />} */}
         <div className="header">
           <div className="autoComplete">
             <Autocomplete getSinglePokemon={getSinglePokemon} autoCompleteArray={pokemonData?.map(pokemon => pokemon.name)} />
@@ -184,7 +191,7 @@ function App() {
           <SelectBox setLimit={setLimit} setPage={setPage} getData={getData} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
