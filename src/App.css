@@ -11,25 +11,49 @@
   font-size: calc(10px + 2vmin);
   border-radius: 10px;
 }
+
+.autoComplete {
+  display: flex;
+  justify-content: center;
+  width: 49%;
+}
+
+.checkbox {
+  font-size: 13px;
+  /* border: 1px solid red; */
+  display: flex;
+  width: 50%;
+  align-items:flex-start;
+  flex-wrap: wrap;
+}
+
 p {
   height: 20px;
   margin-bottom: 10px;
 }
+
 p:hover {
   cursor: pointer;
 }
 
 .header {
+  /* border: 1px solid red; */
   width: 100%;
-  position: absolute;
-  top: 25px;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-@media (max-width: 380px) {
+@media (max-width: 750px) {
   .header {
-    width: 80%;
+    width: 100%;
+  }
+  .autoComplete {
+    width: 100%;
+  }
+  .checkbox {
+    width: 100%;
   }
 }
 

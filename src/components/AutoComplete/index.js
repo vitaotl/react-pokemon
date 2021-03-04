@@ -10,7 +10,7 @@ export default function FreeSolo({ autoCompleteArray, getSinglePokemon }) {
     getSinglePokemon(value)
   }
   return (
-    <div style={{ width: 300 }}>
+    <div style={{ width: '200px' }}>
       <Autocomplete
         freeSolo
         id="free-solo-2-demo"
