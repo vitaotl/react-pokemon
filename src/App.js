@@ -126,7 +126,7 @@ function App() {
     let filteredArr = []
     let a = []
     let checkAbilities = abilities.filter(ability => {
-      if (Object.entries(ability)[0][1]) {}
+      if (Object.entries(ability)[0][1])
         return ability
     }).map(filter => Object.entries(filter)[0][0])
     console.log(checkAbilities);
